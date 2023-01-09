@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="shortcut icon" href="./src/public/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./src/style/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,600;0,800;1,300;1,600;1,800&display=swap" rel="stylesheet">
+
+  <title>Search Countries</title>
+
+  <script src="https://kit.fontawesome.com/736f9082a4.js" crossorigin="anonymous"></script>
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
+</head>
+<body class="font-nunito transition-all duration-300 dark:bg-very-darkblue">
+  <header class="px-4 py-8 shadow-md md:px-10 dark:bg-darkblue">
+    <nav class="flex justify-between items-center dark:text-white">
+      <h1 class="font-extrabold md:text-xl"><a href="/">Where in the world?</a></h1>
+      <button id="darkMode" class="md:text-lg">
+        <i class="fa-regular fa-moon"></i>
+        <span class="font-semibold">Dark Mode</span>
+      </button>
+    </nav>
+  </header>
+  <main class="p-4">
+    <section class="mt-5">
+      <div id="countrySearch">
+        <div class="md:flex md:justify-between md:items-center md:px-6">
+          <div class="w-full py-4 px-6 shadow-input rounded-lg flex items-center gap-5 md:w-3/5 lg:w-2/5 dark:bg-darkblue">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 text-lg dark:text-white"></i>
+            <input class="w-full font-nunito outline-none dark:bg-darkblue dark:text-white" type="text" id="searchInput" placeholder="Search for a country...">
+          </div>
+          <div class="mt-10 relative md:mt-0">
+            <button id="displayRegion" class="w-full py-4 px-6 flex gap-2 items-center shadow-input rounded-lg dark:bg-darkblue dark:text-white">Filter by Region  <i class="fa-solid fa-angle-down"></i></button>
+            <div id="region" class="absolute top-16 w-2/3 py-4 px-6 shadow-input rounded-lg z-10 bg-white hidden md:w-full dark:bg-darkblue">
+              <nav class="dark:text-white">
+                <ul class="flex flex-col gap-2">
+                  <li><button id="africa" onclick="getCountryRegion(africa)">Africa</button></li>
+                  <li><button id="america" onclick="getCountryRegion(america)">America</button></li>
+                  <li><button id="asia" onclick="getCountryRegion(asia)">Asia</button></li>
+                  <li><button id="europe" onclick="getCountryRegion(europe)">Europe</button></li>
+                  <li><button id="oceania" onclick="getCountryRegion(oceania)">Oceania</button></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="contentLoader" class="mt-20 flex justify-center items-center gap-3">
+        <div class="lds-dual-ring dark:after:border-y-white"></div>
+        <p class="font-semibold text-lg dark:text-white">Loading...</p>
+      </div>
+      <div id="countryLists" class="my-12 px-6 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4"></div>
+      <div id="detailCountry" class="mt-6 mb-12 hidden md:px-12"></div>
+    </section>
+  </main>
+  <footer class="w-full p-2 fixed bottom-0 bg-white text-center rounded-t-lg shadow-input transition-all duration-500 dark:text-white dark:bg-darkblue">
+    <p class="text-sm">Data source from <a href="https://restcountries.com/" target="_blank" class="font-semibold hover:text-red-500">REST Countries</a> & Design from <a href="https://www.frontendmentor.io/" target="_blank" class="font-semibold hover:text-red-400">Frontend Mentor</a></p>
+    <p class="text-sm">Build with <span class="text-red-600">❤</span> Copyright &copy; 2022 <a href="https://www.frontendmentor.io/profile/naufalf25" target="_blank" class="font-semibold hover:text-cyan-500">Muhammad Naufal Farras</a></p>
+  </footer>
+  <script src="./src/scripts/index.js"></script>
+</body>
+</html>
